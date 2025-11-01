@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="730.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.studentattendance.MainController">
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="730.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.studentattendance.SecondController">
    <children>
       <Label text="Manage students">
          <font>
@@ -150,7 +150,7 @@
           <TableColumn prefWidth="524.0" text="Date" />
         </columns>
       </TableView>
-      <Button fx:id="updateStudentBtn" mnemonicParsing="false" text="Update student">
+      <Button fx:id="updateStudentBtn" mnemonicParsing="false" text="Update student" onAction="#handleStudentManager" style="-fx-font-size: 14px;">
          <VBox.margin>
             <Insets top="10.0" />
          </VBox.margin>

@@ -4,26 +4,25 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 
 public class Student extends Person{
-    private int id;
+    private String id;
     private String group;
     private ArrayList<DateFormat> attendance;
 
-    public Student(String name, String lastName, int id, String group) {
-        this.name = name;
-        this.lastName = lastName;
+    public Student(String name, String lastName, String id, String group) {
+        this.name = name + " " + lastName;
         this.group = group;
         this.id = id;
     }
 
-    public void setName(String name){
+    public void setName(String name, String lastName) {
+        this.name = name + " " + lastName;
+    }
+
+    public void setName(String name) {
         this.name = name;
     }
 
-    public void setLastName(String lastName){
-        this.lastName = lastName;
-    }
-
-    public void setId(int id){
+    public void setId(String id){
         this.id = id;
     }
 
@@ -33,6 +32,10 @@ public class Student extends Person{
 
     public void addAttendance(DateFormat date){
         attendance.add(date);
+    }
+
+    public void setAttendance(ArrayList<DateFormat> attendance){
+        this.attendance = attendance;
     }
 
     public void removeAttendance(DateFormat date){
@@ -46,11 +49,7 @@ public class Student extends Person{
         return name;
     }
 
-    public String getLastName(){
-        return lastName;
-    }
-
-    public int getId(){
+    public String getId(){
         return id;
     }
 
