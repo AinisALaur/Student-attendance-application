@@ -4,19 +4,21 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="511.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.studentattendance.GroupController">
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="730.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.studentattendance.GroupController">
     <children>
         <Label text="Edit group">
             <font>
                 <Font size="24.0" />
             </font>
             <VBox.margin>
-                <Insets bottom="30.0" top="10.0" />
+                <Insets bottom="10.0" top="10.0" />
             </VBox.margin>
         </Label>
         <HBox prefHeight="64.0" prefWidth="600.0">
@@ -77,7 +79,7 @@
          <children>
             <VBox alignment="CENTER" maxWidth="300.0" minWidth="300.0" prefHeight="200.0" prefWidth="300.0">
                <children>
-                  <Label text="Remove group member">
+                  <Label text="Manage members">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -91,10 +93,35 @@
             </VBox>
          </children>
       </HBox>
+      <HBox prefHeight="64.0" prefWidth="600.0">
+         <children>
+            <VBox alignment="CENTER" maxWidth="300.0" minWidth="300.0" prefHeight="200.0" prefWidth="300.0">
+               <children>
+                  <Button mnemonicParsing="false" text="Add member" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" maxWidth="300.0" minWidth="300.0" prefHeight="200.0" prefWidth="300.0">
+               <children>
+                  <Button mnemonicParsing="false" text="Remove member" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <TableView prefHeight="200.0" prefWidth="200.0">
+        <columns>
+          <TableColumn prefWidth="96.0" text="Instance" />
+          <TableColumn prefWidth="503.0" text="Member" />
+        </columns>
+      </TableView>
         <Button mnemonicParsing="false" text="Update group">
             <VBox.margin>
-                <Insets top="50.0" />
+                <Insets top="10.0" />
             </VBox.margin>
         </Button>
+      <Button mnemonicParsing="false" text="Delete group" textFill="RED">
+         <VBox.margin>
+            <Insets top="30.0" />
+         </VBox.margin>
+      </Button>
     </children>
 </VBox>

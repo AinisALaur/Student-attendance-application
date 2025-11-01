@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" prefHeight="800.0" prefWidth="700.0" spacing="20.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/25" fx:controller="com.example.studentattendance.MainController">
+<VBox alignment="TOP_CENTER" prefHeight="700.0" prefWidth="700.0" spacing="20.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.studentattendance.MainController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
@@ -132,17 +132,12 @@
          <children>
             <HBox alignment="CENTER" prefHeight="45.0" prefWidth="350.0">
                <children>
-                  <Button mnemonicParsing="false" text="Add a new student" />
+                  <Button fx:id="newStudentBtn" mnemonicParsing="false" onAction="#onManageStudentClick" text="Manage students" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="350.0">
                <children>
-                  <Button mnemonicParsing="false" text="Manage groups" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="45.0" prefWidth="350.0">
-               <children>
-                  <Button mnemonicParsing="false" text="Edit an exsisting student" />
+                  <Button mnemonicParsing="false" onAction="#onManageGroupClick" text="Manage groups" />
                </children>
             </HBox>
          </children>
