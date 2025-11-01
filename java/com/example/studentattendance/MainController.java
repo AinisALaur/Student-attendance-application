@@ -37,7 +37,7 @@ public class MainController {
         ObservableList<Student> students = FXCollections.observableArrayList(university.getStudents());
 
         studIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
-        studNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        studNameCol.setCellValueFactory(new PropertyValueFactory<>("info"));
         studGroupCol.setCellValueFactory(new PropertyValueFactory<>("group"));
 
         if(students == null || students.isEmpty()){

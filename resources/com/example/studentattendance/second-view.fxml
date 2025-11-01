@@ -35,7 +35,7 @@
             </VBox>
             <VBox alignment="CENTER" maxWidth="300.0" minWidth="300.0" prefHeight="200.0" prefWidth="300.0">
                <children>
-                  <ChoiceBox fx:id="studentsList" prefWidth="150.0" />
+                  <ChoiceBox fx:id="studentsList" onAction="#handleStudentSelection" prefWidth="150.0" />
                </children>
             </VBox>
          </children>
@@ -134,23 +134,22 @@
          <children>
             <VBox alignment="CENTER" maxWidth="300.0" minWidth="300.0" prefHeight="200.0" prefWidth="300.0">
                <children>
-                  <Button fx:id="addAttendanceBtn" mnemonicParsing="false" text="Add attendance" />
+                  <Button fx:id="addAttendanceBtn" mnemonicParsing="false" onAction="#addAttendance" text="Add attendance" />
                </children>
             </VBox>
             <VBox alignment="CENTER" maxWidth="300.0" minWidth="300.0" prefHeight="200.0" prefWidth="300.0">
                <children>
-                  <Button fx:id="remAttendanceBtn" mnemonicParsing="false" text="Remove attendance" />
+                  <Button fx:id="remAttendanceBtn" mnemonicParsing="false" onAction="#remAttendance" text="Remove attendance" />
                </children>
             </VBox>
          </children>
       </HBox>
-      <TableView prefHeight="133.0" prefWidth="600.0">
+      <TableView fx:id="attendanceList" maxWidth="300.0" minWidth="300.0" prefHeight="133.0" prefWidth="300.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="Instance" />
-          <TableColumn prefWidth="524.0" text="Date" />
+          <TableColumn fx:id="dateCol" maxWidth="1.7976931348623157E308" prefWidth="300.0" text="Attendance dates" />
         </columns>
       </TableView>
-      <Button fx:id="updateStudentBtn" mnemonicParsing="false" text="Update student" onAction="#handleStudentManager" style="-fx-font-size: 14px;">
+      <Button fx:id="updateStudentBtn" mnemonicParsing="false" onAction="#handleStudentManager" text="Update student">
          <VBox.margin>
             <Insets top="10.0" />
          </VBox.margin>

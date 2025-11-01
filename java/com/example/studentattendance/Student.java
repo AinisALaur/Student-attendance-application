@@ -1,25 +1,32 @@
 package com.example.studentattendance;
 
 import java.text.DateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Student extends Person{
     private String id;
     private String group;
-    private ArrayList<DateFormat> attendance;
+    private String lastName;
+    private ArrayList<AttendanceRecord> attendance;
 
     public Student(String name, String lastName, String id, String group) {
-        this.name = name + " " + lastName;
+        this.name = name;
         this.group = group;
+        this.lastName = lastName;
         this.id = id;
     }
 
-    public void setName(String name, String lastName) {
-        this.name = name + " " + lastName;
+    public String getInfo(){
+        return name + " " + lastName;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public void setId(String id){
@@ -30,11 +37,11 @@ public class Student extends Person{
         this.group = group;
     }
 
-    public void addAttendance(DateFormat date){
+    public void addAttendance(AttendanceRecord date){
         attendance.add(date);
     }
 
-    public void setAttendance(ArrayList<DateFormat> attendance){
+    public void setAttendance(ArrayList<AttendanceRecord> attendance){
         this.attendance = attendance;
     }
 
@@ -57,7 +64,11 @@ public class Student extends Person{
         return group;
     }
 
-    public ArrayList<DateFormat> getAttendance(){
+    public String getLastName(){
+        return lastName;
+    }
+
+    public ArrayList<AttendanceRecord> getAttendance(){
         return attendance;
     }
 }
