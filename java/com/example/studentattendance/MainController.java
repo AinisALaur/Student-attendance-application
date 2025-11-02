@@ -22,16 +22,19 @@ public class MainController {
     University university = University.getInstance();
 
     @FXML
-    TableView<Student> studentsList;
+    TableView<TableInstance> studentsList;
 
     @FXML
-    TableColumn<Student, String> studIdCol;
+    TableColumn<TableInstance, String> studIdCol;
 
     @FXML
-    TableColumn<Student, String> studNameCol;
+    TableColumn<TableInstance, String> studNameCol;
 
     @FXML
-    TableColumn<Student, String> studGroupCol;
+    TableColumn<TableInstance, String> studGroupCol;
+
+    @FXML
+    TableColumn<TableInstance, LocalDate> dateCol;
 
     @FXML
     ChoiceBox<String> filterList;
@@ -48,29 +51,71 @@ public class MainController {
     @FXML
     ChoiceBox<String> filterByList;
 
+    Student student1 = new Student("Ainis", "Laurinavicius", "523487", "Informatikas");
+    Student student2 = new Student("Sarunas", "Sinkevicius", "345998", "Informatikas");
+    Student student3 = new Student("Arunas", "Kolabavicius", "948572", "BioInformatikas");
+    Student student4 = new Student("Migle", "Alejunaite", "9087234", "BioInformatikas");
 
-    public void initialize(){
-        System.out.println("Initializing Main Controller");
-        ObservableList<Student> students = FXCollections.observableArrayList(university.getStudents());
+    private ArrayList<TableInstance> getTableInstances(ArrayList<Student> students){
+        ArrayList<TableInstance> studentsToAppend = new ArrayList<>();
+        for(Student student : students){
+            for(AttendanceRecord attended : student.getAttendance()){
+                TableInstance tableInstance = new TableInstance(student, attended.getAttendance());
+                studentsToAppend.add(tableInstance);
+            }
+        }
 
+        return studentsToAppend;
+    }
+
+    private void displayTable(ArrayList<Student> students){
+        ArrayList<TableInstance> studentsToAppend = getTableInstances(students);
         studIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         studNameCol.setCellValueFactory(new PropertyValueFactory<>("info"));
         studGroupCol.setCellValueFactory(new PropertyValueFactory<>("group"));
+        dateCol.setCellValueFactory(new PropertyValueFactory<>("attended"));
+        ObservableList<TableInstance> displayContent = FXCollections.observableArrayList(studentsToAppend);
+        if(displayContent.isEmpty()){
+            return;
+        }
+        studentsList.setItems(displayContent);
+    }
+
+
+    public void initialize(){
+        AttendanceRecord attended = new AttendanceRecord();
+        attended.setAttendance(LocalDate.of(2025, 11, 2));
+
+        ArrayList<AttendanceRecord> attendance = new  ArrayList<>(){{
+            add(attended);
+        }};
+
+        student1.setAttendance(attendance);
+        student2.setAttendance(attendance);
+        student3.setAttendance(attendance);
+        student4.setAttendance(attendance);
+
+        university.addStudent(student1);
+        university.addStudent(student2);
+        university.addStudent(student3);
+        university.addStudent(student4);
+
+        university.addGroup("Informatikas");
+        university.addGroup("BioInformatikas");
 
         ArrayList<String> filters = new ArrayList<>(){
             {
                 add("Student");
                 add("Group");
+                add("No filter");
             }
         };
 
         filterList.getItems().addAll(filters);
+        filterList.setValue("No filter");
         startDate.setValue(LocalDate.now());
 
-        if(students == null || students.isEmpty()){
-            return;
-        }
-        studentsList.setItems(students);
+        displayTable(university.getStudents());
     }
 
     public void updateFilter(){
@@ -87,6 +132,34 @@ public class MainController {
             }
         }
 
+        displayTable(university.getStudents());
+    }
+
+    public void activateFilter(){
+        String filter = filterList.getValue();
+        String choice = filterByList.getValue();
+
+        if(filter.equals("No filter")){
+            displayTable(university.getStudents());
+            return;
+        }
+
+        ArrayList<Student> studentsToDisplay = new ArrayList<>();
+        if(filter.equals("Student")){
+            for(Student student : university.getStudents()){
+                if(student.getInfo().equals(choice)){
+                    studentsToDisplay.add(student);
+                }
+            }
+        }else{
+            for(Student student : university.getStudents()){
+                if(student.getGroup().equals(choice)){
+                    studentsToDisplay.add(student);
+                }
+            }
+        }
+
+        displayTable(studentsToDisplay);
     }
 
     @FXML
