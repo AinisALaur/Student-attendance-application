@@ -28,8 +28,6 @@ public class SecondController {
     @FXML
     TextField studentId;
     @FXML
-    ChoiceBox<String> groupList;
-    @FXML
     DatePicker attendanceDate;
 
     @FXML
@@ -142,11 +140,7 @@ public class SecondController {
         String name =  studentName.getText();
         String lastName = studentLName.getText();
         String id = studentId.getText();
-        String group = groupList.getValue();
-
-        if(group == null){
-            group = "Not selected";
-        }
+        String group = "Not selected";
 
         if(selectedStudent == null){
             Student student = new Student(name, lastName, id, group);

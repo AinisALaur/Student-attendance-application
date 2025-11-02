@@ -21,7 +21,7 @@
             <Font size="22.0" />
          </font>
       </Label>
-      <TableView fx:id="studentsList" fixedCellSize="50.5" prefHeight="265.0" prefWidth="660.0" style="-fx-font-size: 14px;">
+      <TableView fx:id="studentsList" fixedCellSize="50.5" prefHeight="265.0" prefWidth="660.0" style="-fx-font-size: 14px; -fx-alignment: CENTER;">
         <columns>
           <TableColumn fx:id="studIdCol" prefWidth="95.0" text="Student ID" />
           <TableColumn fx:id="studNameCol" prefWidth="318.0" text="Student" />

@@ -98,24 +98,6 @@
          <children>
             <VBox alignment="CENTER" maxWidth="300.0" minWidth="300.0" prefHeight="200.0" prefWidth="300.0">
                <children>
-                  <Label text="Group">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-               </children>
-            </VBox>
-            <VBox alignment="CENTER" maxWidth="300.0" minWidth="300.0" prefHeight="200.0" prefWidth="300.0">
-               <children>
-                  <ChoiceBox fx:id="groupList" prefWidth="150.0" />
-               </children>
-            </VBox>
-         </children>
-      </HBox>
-      <HBox prefHeight="64.0" prefWidth="600.0">
-         <children>
-            <VBox alignment="CENTER" maxWidth="300.0" minWidth="300.0" prefHeight="200.0" prefWidth="300.0">
-               <children>
                   <Label text="Edit attendance">
                      <font>
                         <Font size="16.0" />
@@ -143,10 +125,13 @@
                </children>
             </VBox>
          </children>
+         <VBox.margin>
+            <Insets bottom="40.0" />
+         </VBox.margin>
       </HBox>
-      <TableView fx:id="attendanceList" maxWidth="300.0" minWidth="300.0" prefHeight="133.0" prefWidth="300.0">
+      <TableView fx:id="attendanceList" maxWidth="300.0" minWidth="300.0" prefHeight="133.0" prefWidth="300.0" style="-fx-font-size: 14px; -fx-alignment: CENTER;">
         <columns>
-          <TableColumn fx:id="dateCol" maxWidth="1.7976931348623157E308" prefWidth="300.0" text="Attendance dates" />
+          <TableColumn fx:id="dateCol" maxWidth="1.7976931348623157E308" prefWidth="300.0" style="-fx-font-size: 14px; -fx-alignment: CENTER;" text="Attendance dates" />
         </columns>
       </TableView>
       <Button fx:id="updateStudentBtn" mnemonicParsing="false" onAction="#handleStudentManager" text="Update student">

@@ -1,16 +1,19 @@
 package com.example.studentattendance;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class GroupController {
@@ -23,7 +26,16 @@ public class GroupController {
     ChoiceBox<String> studentsList;
 
     @FXML
+    Button remGroup;
+
+    @FXML
     TextField groupName;
+
+    @FXML
+    TableView<Student> SelectedStudentsTable;
+
+    @FXML
+    TableColumn<Student, String> membersTable;
 
     ArrayList<String> groups = null;
     ArrayList<Student> students = null;
@@ -49,11 +61,22 @@ public class GroupController {
                 studentsList.getItems().add(student.getName() + " " +student.getLastName());
             }
         }
+
+        studentsList.getItems().add("None");
+    }
+
+    public void groupHandler(){
+        String selectedGroup = groupsList.getValue();
+        if(selectedGroup.equals("New group")){
+            remGroup.setDisable(true);
+            return;
+        }
+        remGroup.setDisable(false);
     }
 
     private boolean groupExists(String groupToCheck){
         for(String group : groups){
-            if(group.equals(group)){
+            if(group.equals(groupToCheck)){
                 return true;
             }
         }
@@ -68,6 +91,43 @@ public class GroupController {
         stage.show();
     }
 
+    private Student getStudentByName(String name){
+        for(Student student : students){
+            if((student.getName() + " " +student.getLastName()).equals(name)){
+                return student;
+            }
+        }
+        return null;
+    }
+
+    public void addStudentToGroup(){
+        String studentName = studentsList.getValue();
+        Student student = getStudentByName(studentName);
+
+        if(student == null || studentsAddedToGroup.contains(student)){
+            return;
+        }
+
+        studentsAddedToGroup.add(student);
+        ObservableList<Student> members = FXCollections.observableArrayList(studentsAddedToGroup);
+        membersTable.setCellValueFactory(new PropertyValueFactory<>("info"));
+        SelectedStudentsTable.setItems(members);
+    }
+
+    public void remStudentFromGroup(){
+        String studentName = studentsList.getValue();
+        Student student = getStudentByName(studentName);
+
+        if(student == null || !studentsAddedToGroup.contains(student)){
+            return;
+        }
+
+        studentsAddedToGroup.remove(student);
+        ObservableList<Student> members = FXCollections.observableArrayList(studentsAddedToGroup);
+        membersTable.setCellValueFactory(new PropertyValueFactory<>("info"));
+        SelectedStudentsTable.setItems(members);
+    }
+
 
     public void handleUpdateBtn(ActionEvent actionEvent) throws IOException {
         String nameOfGroup = groupName.getText();
@@ -76,16 +136,35 @@ public class GroupController {
             return;
         }
 
-        university.addGroup(nameOfGroup);
-
-        for(Student student : studentsAddedToGroup){
-            student.setGroup(nameOfGroup);
+        if(!groupExists(nameOfGroup)){
+            university.addGroup(nameOfGroup);
+            for(Student student : students){
+                if(studentsAddedToGroup.contains(student)) {
+                    student.setGroup(nameOfGroup);
+                }
+            }
+            goBackToMain(actionEvent);
+        }else{
+            System.out.println("Group " + nameOfGroup + " already exists");
         }
-
-        goBackToMain(actionEvent);
     }
 
+    public void deleteGroup(ActionEvent actionEvent) throws IOException {
+        String groupToDelete = groupsList.getValue();
+        if(groupToDelete == null){
+            return;
+        }
 
+        for(Student student : students){
+            if(student.getGroup().equals(groupToDelete)){
+                student.setGroup("Not selected");
+            }
+        }
+
+        studentsAddedToGroup.clear();
+        university.remGroup(groupToDelete);
+        goBackToMain(actionEvent);
+    }
 
 
 }

@@ -34,7 +34,7 @@
                 </VBox>
                 <VBox alignment="CENTER" maxWidth="300.0" minWidth="300.0" prefHeight="200.0" prefWidth="300.0">
                     <children>
-                        <ChoiceBox fx:id="groupsList" prefWidth="150.0" />
+                        <ChoiceBox fx:id="groupsList" onAction="#groupHandler" prefWidth="150.0" />
                     </children>
                 </VBox>
             </children>
@@ -70,7 +70,7 @@
             </VBox>
             <VBox alignment="CENTER" maxWidth="300.0" minWidth="300.0" prefHeight="200.0" prefWidth="300.0">
                <children>
-                  <ChoiceBox fx:id="studentsLists" prefWidth="150.0" />
+                  <ChoiceBox fx:id="studentsList" prefWidth="150.0" />
                </children>
             </VBox>
          </children>
@@ -79,19 +79,19 @@
          <children>
             <VBox alignment="CENTER" maxWidth="300.0" minWidth="300.0" prefHeight="200.0" prefWidth="300.0">
                <children>
-                  <Button fx:id="addMemberBtn" mnemonicParsing="false" text="Add member" />
+                  <Button fx:id="addMemberBtn" mnemonicParsing="false" onAction="#addStudentToGroup" text="Add member" />
                </children>
             </VBox>
             <VBox alignment="CENTER" maxWidth="300.0" minWidth="300.0" prefHeight="200.0" prefWidth="300.0">
                <children>
-                  <Button fx:id="remMemberBtn" mnemonicParsing="false" text="Remove member" />
+                  <Button fx:id="remMemberBtn" mnemonicParsing="false" onAction="#remStudentFromGroup" text="Remove member" />
                </children>
             </VBox>
          </children>
       </HBox>
-      <TableView prefHeight="200.0" prefWidth="200.0">
+      <TableView fx:id="SelectedStudentsTable" prefHeight="200.0" prefWidth="200.0" style="-fx-font-size: 14px;">
         <columns>
-          <TableColumn prefWidth="599.0" text="Members" />
+          <TableColumn fx:id="membersTable" prefWidth="599.0" style="-fx-font-size: 14px; -fx-alignment: CENTER;" text="Members" />
         </columns>
          <VBox.margin>
             <Insets bottom="40.0" />
@@ -102,7 +102,7 @@
                 <Insets top="10.0" />
             </VBox.margin>
         </Button>
-      <Button fx:id="remGroup" mnemonicParsing="false" text="Delete group" textFill="RED">
+      <Button fx:id="remGroup" mnemonicParsing="false" onAction="#deleteGroup" text="Delete group" textFill="RED">
          <VBox.margin>
             <Insets top="30.0" />
          </VBox.margin>
