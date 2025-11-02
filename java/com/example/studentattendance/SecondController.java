@@ -55,6 +55,12 @@ public class SecondController {
         studentsList.getItems().add("New student");
     }
 
+    private ArrayList<AttendanceRecord> copyAttendance(ArrayList<AttendanceRecord> attendance){
+        ArrayList<AttendanceRecord> list = new ArrayList<>();
+        list.addAll(attendance);
+        return list;
+    }
+
     public void handleStudentSelection(){
         String info1 = studentsList.getValue();
 
@@ -75,8 +81,7 @@ public class SecondController {
         studentName.setText(selectedStudent.getName());
         studentLName.setText(selectedStudent.getLastName());
         studentId.setText(selectedStudent.getId());
-        attended = selectedStudent.getAttendance();
-        System.out.println("Attendance records: " +  attended.toArray().length);
+        attended = copyAttendance(selectedStudent.getAttendance());
         ObservableList<AttendanceRecord> attendance = FXCollections.observableArrayList(attended);
         dateCol.setCellValueFactory(new PropertyValueFactory<>("attendance"));
         attendanceList.setItems(attendance);
@@ -134,7 +139,6 @@ public class SecondController {
     }
 
     public void handleStudentManager(ActionEvent event) throws IOException {
-        String selectedStudent = studentsList.getValue();
         String name =  studentName.getText();
         String lastName = studentLName.getText();
         String id = studentId.getText();
@@ -144,11 +148,18 @@ public class SecondController {
             group = "Not selected";
         }
 
-        if(selectedStudent.equals("New student")){
+        if(selectedStudent == null){
             Student student = new Student(name, lastName, id, group);
             student.setAttendance(attended);
             university.addStudent(student);
+        }else{
+            selectedStudent.setName(name);
+            selectedStudent.setLastName(lastName);
+            selectedStudent.setId(id);
+            selectedStudent.setGroup(group);
+            selectedStudent.setAttendance(attended);
         }
+
 
         goBackToMain(event);
     }
