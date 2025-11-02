@@ -38,6 +38,10 @@ public class SecondController {
     @FXML
     Button remStudentBtn;
 
+    @FXML
+    Button updateStudentBtn;
+
+
     ArrayList<Student> students = university.getStudents();
     ArrayList<AttendanceRecord> attended = new ArrayList<>();
 
@@ -51,6 +55,7 @@ public class SecondController {
             }
         }
         studentsList.getItems().add("New student");
+        remStudentBtn.setDisable(true);
     }
 
     private ArrayList<AttendanceRecord> copyAttendance(ArrayList<AttendanceRecord> attendance){
@@ -69,6 +74,7 @@ public class SecondController {
             studentLName.setText("");
             studentId.setText("");
             attended.clear();
+            updateStudentBtn.setText("Add student");
         }else{
             remStudentBtn.setDisable(false);
             for(Student student : students){
@@ -77,6 +83,7 @@ public class SecondController {
                     selectedStudent = student;
                 }
             }
+            updateStudentBtn.setText("Update student");
 
             studentName.setText(selectedStudent.getName());
             studentLName.setText(selectedStudent.getLastName());
@@ -132,7 +139,7 @@ public class SecondController {
         }
     }
 
-    private void goBackToMain(ActionEvent event) throws IOException {
+    public void goBackToMain(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("main-view.fxml"));
         Parent root = loader.load();
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

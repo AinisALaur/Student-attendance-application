@@ -63,6 +63,7 @@ public class GroupController {
         }
 
         studentsList.getItems().add("None");
+        remGroup.setDisable(true);
     }
 
     public void groupHandler(){
@@ -94,7 +95,7 @@ public class GroupController {
         return false;
     }
 
-    private void goBackToMain(ActionEvent event) throws IOException {
+    public void goBackToMain(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("main-view.fxml"));
         Parent root = loader.load();
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

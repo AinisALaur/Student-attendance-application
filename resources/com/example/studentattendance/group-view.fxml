@@ -104,8 +104,9 @@
         </Button>
       <Button fx:id="remGroup" mnemonicParsing="false" onAction="#deleteGroup" text="Delete group" textFill="RED">
          <VBox.margin>
-            <Insets top="30.0" />
+            <Insets bottom="30.0" top="30.0" />
          </VBox.margin>
       </Button>
+      <Button fx:id="remStudentBtn1" mnemonicParsing="false" onAction="#goBackToMain" text="Back" />
     </children>
 </VBox>

@@ -126,7 +126,7 @@
             </VBox>
          </children>
          <VBox.margin>
-            <Insets bottom="40.0" />
+            <Insets bottom="10.0" />
          </VBox.margin>
       </HBox>
       <TableView fx:id="attendanceList" maxWidth="300.0" minWidth="300.0" prefHeight="133.0" prefWidth="300.0" style="-fx-font-size: 14px; -fx-alignment: CENTER;">
@@ -141,8 +141,9 @@
       </Button>
       <Button fx:id="remStudentBtn" mnemonicParsing="false" onAction="#remStudentManager" text="Delete student" textFill="RED">
          <VBox.margin>
-            <Insets top="20.0" />
+            <Insets bottom="20.0" top="20.0" />
          </VBox.margin>
       </Button>
+      <Button fx:id="remStudentBtn1" mnemonicParsing="false" onAction="#goBackToMain" text="Back" />
    </children>
 </VBox>
