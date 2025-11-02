@@ -8,12 +8,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class MainController {
@@ -31,6 +33,21 @@ public class MainController {
     @FXML
     TableColumn<Student, String> studGroupCol;
 
+    @FXML
+    ChoiceBox<String> filterList;
+
+    @FXML
+    Label chooseText;
+
+    @FXML
+    DatePicker startDate;
+
+    @FXML
+    DatePicker endDate;
+
+    @FXML
+    ChoiceBox<String> filterByList;
+
 
     public void initialize(){
         System.out.println("Initializing Main Controller");
@@ -40,12 +57,37 @@ public class MainController {
         studNameCol.setCellValueFactory(new PropertyValueFactory<>("info"));
         studGroupCol.setCellValueFactory(new PropertyValueFactory<>("group"));
 
+        ArrayList<String> filters = new ArrayList<>(){
+            {
+                add("Student");
+                add("Group");
+            }
+        };
+
+        filterList.getItems().addAll(filters);
+        startDate.setValue(LocalDate.now());
+
         if(students == null || students.isEmpty()){
             return;
         }
         studentsList.setItems(students);
     }
 
+    public void updateFilter(){
+        String filter = filterList.getValue().toLowerCase();
+        chooseText.setText("Choose " +  filter);
+        filterByList.getItems().clear();
+        if(filter.equals("student")){
+            for(Student student : university.getStudents()){
+                filterByList.getItems().add(student.getInfo());
+            }
+        }else{
+            for(String group : university.getGroups()){
+                filterByList.getItems().add(group);
+            }
+        }
+
+    }
 
     @FXML
     protected void onManageStudentClick(ActionEvent event) throws IOException {
