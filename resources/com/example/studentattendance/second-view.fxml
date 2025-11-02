@@ -154,7 +154,7 @@
             <Insets top="10.0" />
          </VBox.margin>
       </Button>
-      <Button fx:id="remStudentBtn" mnemonicParsing="false" text="Delete student" textFill="RED">
+      <Button fx:id="remStudentBtn" mnemonicParsing="false" onAction="#remStudentManager" text="Delete student" textFill="RED">
          <VBox.margin>
             <Insets top="20.0" />
          </VBox.margin>

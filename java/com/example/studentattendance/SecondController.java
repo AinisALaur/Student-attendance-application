@@ -37,8 +37,13 @@ public class SecondController {
     @FXML
     TableColumn<AttendanceRecord, LocalDate> dateCol;
 
+    @FXML
+    Button remStudentBtn;
+
     ArrayList<Student> students = university.getStudents();
-    ArrayList<AttendanceRecord> attended = new  ArrayList<>();
+    ArrayList<AttendanceRecord> attended = new ArrayList<>();
+
+    Student selectedStudent = null;
 
     public void initialize(){
         if(students != null){
@@ -51,12 +56,14 @@ public class SecondController {
     }
 
     public void handleStudentSelection(){
-        Student selectedStudent = null;
         String info1 = studentsList.getValue();
 
         if(info1.equals("New student")){
+            remStudentBtn.setDisable(true);
             return;
         }
+
+        remStudentBtn.setDisable(false);
 
         for(Student student : students){
             String info =  student.getName() + " " + student.getLastName();
@@ -69,19 +76,20 @@ public class SecondController {
         studentLName.setText(selectedStudent.getLastName());
         studentId.setText(selectedStudent.getId());
         attended = selectedStudent.getAttendance();
+        System.out.println("Attendance records: " +  attended.toArray().length);
         ObservableList<AttendanceRecord> attendance = FXCollections.observableArrayList(attended);
         dateCol.setCellValueFactory(new PropertyValueFactory<>("attendance"));
         attendanceList.setItems(attendance);
     }
 
 
-    private boolean hasAttended(LocalDate date){
+    private AttendanceRecord hasAttended(LocalDate date){
         for(AttendanceRecord record : attended){
-            if(date == record.getAttendance()){
-                return true;
+            if(date.isEqual(record.getAttendance())){
+                return record;
             }
         }
-        return false;
+        return null;
     }
 
     public void addAttendance(){
@@ -90,7 +98,7 @@ public class SecondController {
             return;
         }
 
-        if(!hasAttended(date)){
+        if(hasAttended(date) == null){
             AttendanceRecord attendance = new AttendanceRecord();
             attendance.setAttendance(date);
             attended.add(attendance);
@@ -107,17 +115,22 @@ public class SecondController {
             return;
         }
 
-        if(hasAttended(date)){
-            for(AttendanceRecord record : attended){
-                if(date == record.getAttendance()){
-                    attended.remove(record);
-                    ObservableList<AttendanceRecord> attendance = FXCollections.observableArrayList(attended);
-                    dateCol.setCellValueFactory(new PropertyValueFactory<>("attendance"));
-                    attendanceList.setItems(attendance);
-                    return;
-                }
-            }
+        AttendanceRecord recordToRemove = hasAttended(date);
+
+        if(recordToRemove != null){
+            attended.remove(recordToRemove);
+            ObservableList<AttendanceRecord> attendance = FXCollections.observableArrayList(attended);
+            dateCol.setCellValueFactory(new PropertyValueFactory<>("attendance"));
+            attendanceList.setItems(attendance);
         }
+    }
+
+    private void goBackToMain(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("main-view.fxml"));
+        Parent root = loader.load();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 
     public void handleStudentManager(ActionEvent event) throws IOException {
@@ -137,11 +150,12 @@ public class SecondController {
             university.addStudent(student);
         }
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("main-view.fxml"));
-        Parent root = loader.load();
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(root));
-        stage.show();
+        goBackToMain(event);
+    }
+
+    public void remStudentManager(ActionEvent event) throws IOException {
+        university.removeStudent(selectedStudent);
+        goBackToMain(event);
     }
 
 
