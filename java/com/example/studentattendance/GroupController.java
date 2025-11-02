@@ -69,9 +69,20 @@ public class GroupController {
         String selectedGroup = groupsList.getValue();
         if(selectedGroup.equals("New group")){
             remGroup.setDisable(true);
-            return;
+            studentsAddedToGroup.clear();
+            groupName.setText("");
+        }else{
+            for(Student student : students){
+                if(student.getGroup().equals(selectedGroup)){
+                    studentsAddedToGroup.add(student);
+                }
+            }
+            groupName.setText(selectedGroup);
+            remGroup.setDisable(false);
         }
-        remGroup.setDisable(false);
+        ObservableList<Student> members = FXCollections.observableArrayList(studentsAddedToGroup);
+        membersTable.setCellValueFactory(new PropertyValueFactory<>("info"));
+        SelectedStudentsTable.setItems(members);
     }
 
     private boolean groupExists(String groupToCheck){
@@ -122,6 +133,7 @@ public class GroupController {
             return;
         }
 
+        student.setGroup("Not selected");
         studentsAddedToGroup.remove(student);
         ObservableList<Student> members = FXCollections.observableArrayList(studentsAddedToGroup);
         membersTable.setCellValueFactory(new PropertyValueFactory<>("info"));
@@ -136,7 +148,7 @@ public class GroupController {
             return;
         }
 
-        if(!groupExists(nameOfGroup)){
+        if(!groupExists(nameOfGroup) || !groupsList.getValue().equals("New group")){
             university.addGroup(nameOfGroup);
             for(Student student : students){
                 if(studentsAddedToGroup.contains(student)) {

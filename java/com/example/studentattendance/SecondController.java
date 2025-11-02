@@ -63,23 +63,27 @@ public class SecondController {
         String info1 = studentsList.getValue();
 
         if(info1.equals("New student")){
+            selectedStudent = null;
             remStudentBtn.setDisable(true);
-            return;
-        }
-
-        remStudentBtn.setDisable(false);
-
-        for(Student student : students){
-            String info =  student.getName() + " " + student.getLastName();
-            if(info.equals(info1)){
-                selectedStudent = student;
+            studentName.setText("");
+            studentLName.setText("");
+            studentId.setText("");
+            attended.clear();
+        }else{
+            remStudentBtn.setDisable(false);
+            for(Student student : students){
+                String info =  student.getName() + " " + student.getLastName();
+                if(info.equals(info1)){
+                    selectedStudent = student;
+                }
             }
+
+            studentName.setText(selectedStudent.getName());
+            studentLName.setText(selectedStudent.getLastName());
+            studentId.setText(selectedStudent.getId());
+            attended = copyAttendance(selectedStudent.getAttendance());
         }
 
-        studentName.setText(selectedStudent.getName());
-        studentLName.setText(selectedStudent.getLastName());
-        studentId.setText(selectedStudent.getId());
-        attended = copyAttendance(selectedStudent.getAttendance());
         ObservableList<AttendanceRecord> attendance = FXCollections.observableArrayList(attended);
         dateCol.setCellValueFactory(new PropertyValueFactory<>("attendance"));
         attendanceList.setItems(attendance);
