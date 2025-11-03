@@ -13,7 +13,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class GroupController {
@@ -41,11 +40,16 @@ public class GroupController {
     ArrayList<Student> students = null;
     ArrayList<Student> studentsAddedToGroup = new ArrayList<>();
 
+    private void displayTable(ArrayList<Student> students) {
+        SelectedStudentsTable.getItems().clear();
+        ObservableList<Student> members = FXCollections.observableArrayList(studentsAddedToGroup);
+        membersTable.setCellValueFactory(new PropertyValueFactory<>("info"));
+        SelectedStudentsTable.setItems(members);
+    }
+
     public void initialize(){
         groups = university.getGroups();
         students = university.getStudents();
-
-        System.out.println(groups.toArray().length);
 
         if(groups != null){
             for(String group : groups){
@@ -73,6 +77,7 @@ public class GroupController {
             studentsAddedToGroup.clear();
             groupName.setText("");
         }else{
+            studentsAddedToGroup.clear();
             for(Student student : students){
                 if(student.getGroup().equals(selectedGroup)){
                     studentsAddedToGroup.add(student);
@@ -81,9 +86,8 @@ public class GroupController {
             groupName.setText(selectedGroup);
             remGroup.setDisable(false);
         }
-        ObservableList<Student> members = FXCollections.observableArrayList(studentsAddedToGroup);
-        membersTable.setCellValueFactory(new PropertyValueFactory<>("info"));
-        SelectedStudentsTable.setItems(members);
+
+        displayTable(studentsAddedToGroup);
     }
 
     private boolean groupExists(String groupToCheck){
@@ -120,10 +124,7 @@ public class GroupController {
             return;
         }
 
-        studentsAddedToGroup.add(student);
-        ObservableList<Student> members = FXCollections.observableArrayList(studentsAddedToGroup);
-        membersTable.setCellValueFactory(new PropertyValueFactory<>("info"));
-        SelectedStudentsTable.setItems(members);
+        displayTable(studentsAddedToGroup);
     }
 
     public void remStudentFromGroup(){
@@ -136,9 +137,7 @@ public class GroupController {
 
         student.setGroup("Not selected");
         studentsAddedToGroup.remove(student);
-        ObservableList<Student> members = FXCollections.observableArrayList(studentsAddedToGroup);
-        membersTable.setCellValueFactory(new PropertyValueFactory<>("info"));
-        SelectedStudentsTable.setItems(members);
+        displayTable(studentsAddedToGroup);
     }
 
 

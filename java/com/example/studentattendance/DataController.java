@@ -56,6 +56,11 @@ public class DataController {
     }
 
     public void browseImport(ActionEvent event) throws IOException {
+        if(importChoiceBox.getValue() == null){
+            return;
+        }
+
+
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open Data File");
         String dataFilter = importChoiceBox.getValue().toLowerCase();
@@ -75,6 +80,10 @@ public class DataController {
     }
 
     public void browseExport(ActionEvent event) throws IOException {
+        if(importChoiceBox.getValue() == null){
+            return;
+        }
+
         FileChooser fileChooser = new FileChooser();
         String dataFilter = exportChoiceBox.getValue().toLowerCase();
 
@@ -94,7 +103,7 @@ public class DataController {
         }
     }
 
-    public void importData(){
+    public void importData(ActionEvent event) throws IOException {
         DataImporter dataImporter = null;
         if(importChoiceBox.getValue().equals("XLSX")){
             dataImporter = new DataImporterExcel();
@@ -113,9 +122,11 @@ public class DataController {
                 university.addGroup(student.getGroup());
             }
         }
+
+        goBackToMain(event);
     }
 
-    public void exportData(){
+    public void exportData(ActionEvent event) throws IOException {
         DataExporter dataexporter = null;
         if(exportChoiceBox.getValue().equals("XLSX")){
             dataexporter = new DataExporterExcel();
@@ -124,7 +135,7 @@ public class DataController {
         }
 
         dataexporter.exportStudents(students, filePathExport);
+        goBackToMain(event);
     }
-
 
 }
