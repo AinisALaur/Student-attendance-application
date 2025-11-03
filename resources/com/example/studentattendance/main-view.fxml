@@ -162,14 +162,9 @@
       </HBox>
       <HBox prefHeight="87.0" prefWidth="660.0">
          <children>
-            <HBox alignment="CENTER" prefHeight="45.0" prefWidth="350.0">
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="700.0">
                <children>
-                  <Button mnemonicParsing="false" text="Export data" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="350.0">
-               <children>
-                  <Button mnemonicParsing="false" text="Import data" />
+                  <Button mnemonicParsing="false" onAction="#onManageDataClick" text="Manage data" />
                </children>
             </HBox>
          </children>

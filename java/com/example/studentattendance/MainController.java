@@ -75,9 +75,6 @@ public class MainController {
         studGroupCol.setCellValueFactory(new PropertyValueFactory<>("group"));
         dateCol.setCellValueFactory(new PropertyValueFactory<>("attended"));
         ObservableList<TableInstance> displayContent = FXCollections.observableArrayList(filterByDate(studentsToAppend));
-        if(displayContent.isEmpty()){
-            return;
-        }
         displayContent.sort((a, b) -> a.getAttended().compareTo(b.getAttended()));
         studentsList.setItems(displayContent);
     }
@@ -143,7 +140,12 @@ public class MainController {
 
     public void updateFilter(){
         String filter = filterList.getValue().toLowerCase();
-        chooseText.setText("Choose " +  filter);
+        if(filter.equals("student") || filter.equals("group")){
+            chooseText.setText("Choose " +  filter);
+        }else{
+            chooseText.setText("No filter has been chosen");
+        }
+
         filterByList.getItems().clear();
 
         if(filter.equals("student")){
@@ -157,8 +159,6 @@ public class MainController {
                 filterByList.getItems().add(group);
             }
         }
-
-        displayTable(university.getStudents());
     }
 
     public void activateFilter(){
@@ -217,10 +217,12 @@ public class MainController {
 
     public void clearStartDate(){
         startDate.setValue(null);
+        activateFilter();
     }
 
     public void clearEndDate(){
         endDate.setValue(null);
+        activateFilter();
     }
 
 
@@ -236,6 +238,15 @@ public class MainController {
     @FXML
     protected void onManageGroupClick(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("group-view.fxml"));
+        Parent root = loader.load();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+
+    @FXML
+    protected void onManageDataClick(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("export-import.fxml"));
         Parent root = loader.load();
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
