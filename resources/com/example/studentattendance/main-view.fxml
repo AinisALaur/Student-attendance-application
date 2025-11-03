@@ -72,7 +72,16 @@
                         </VBox>
                         <VBox alignment="CENTER" minWidth="330.0" prefHeight="330.0" prefWidth="100.0">
                            <children>
-                              <DatePicker fx:id="startDate" />
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <DatePicker fx:id="startDate" onAction="#updateFilter">
+                                       <HBox.margin>
+                                          <Insets right="20.0" />
+                                       </HBox.margin>
+                                    </DatePicker>
+                                    <Button mnemonicParsing="false" onAction="#clearStartDate" text="Clear" />
+                                 </children>
+                              </HBox>
                            </children>
                         </VBox>
                      </children>
@@ -94,7 +103,16 @@
                         </VBox>
                         <VBox alignment="CENTER" minWidth="330.0" prefHeight="330.0" prefWidth="100.0">
                            <children>
-                              <DatePicker fx:id="endDate" />
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <DatePicker fx:id="endDate" onAction="#updateFilter">
+                                       <HBox.margin>
+                                          <Insets right="20.0" />
+                                       </HBox.margin>
+                                    </DatePicker>
+                                    <Button mnemonicParsing="false" onAction="#clearEndDate" text="Clear" />
+                                 </children>
+                              </HBox>
                            </children>
                         </VBox>
                      </children>

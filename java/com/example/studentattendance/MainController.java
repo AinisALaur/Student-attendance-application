@@ -74,10 +74,11 @@ public class MainController {
         studNameCol.setCellValueFactory(new PropertyValueFactory<>("info"));
         studGroupCol.setCellValueFactory(new PropertyValueFactory<>("group"));
         dateCol.setCellValueFactory(new PropertyValueFactory<>("attended"));
-        ObservableList<TableInstance> displayContent = FXCollections.observableArrayList(studentsToAppend);
+        ObservableList<TableInstance> displayContent = FXCollections.observableArrayList(filterByDate(studentsToAppend));
         if(displayContent.isEmpty()){
             return;
         }
+        displayContent.sort((a, b) -> a.getAttended().compareTo(b.getAttended()));
         studentsList.setItems(displayContent);
     }
 
@@ -86,14 +87,37 @@ public class MainController {
         AttendanceRecord attended = new AttendanceRecord();
         attended.setAttendance(LocalDate.of(2025, 11, 2));
 
-        ArrayList<AttendanceRecord> attendance = new  ArrayList<>(){{
+        AttendanceRecord attended1 = new AttendanceRecord();
+        attended1.setAttendance(LocalDate.of(2025, 10, 2));
+
+        AttendanceRecord attended2 = new AttendanceRecord();
+        attended2.setAttendance(LocalDate.of(2025, 9, 2));
+
+        AttendanceRecord attended3 = new AttendanceRecord();
+        attended3.setAttendance(LocalDate.of(2025, 8, 2));
+
+
+        ArrayList<AttendanceRecord> attendance1 = new  ArrayList<>(){{
             add(attended);
+            add(attended1);
         }};
 
-        student1.setAttendance(attendance);
-        student2.setAttendance(attendance);
-        student3.setAttendance(attendance);
-        student4.setAttendance(attendance);
+        ArrayList<AttendanceRecord> attendance2 = new  ArrayList<>(){{
+            add(attended1);
+        }};
+
+        ArrayList<AttendanceRecord> attendance3 = new  ArrayList<>(){{
+            add(attended2);
+        }};
+
+        ArrayList<AttendanceRecord> attendance4 = new  ArrayList<>(){{
+            add(attended3);
+        }};
+
+        student1.setAttendance(attendance1);
+        student2.setAttendance(attendance2);
+        student3.setAttendance(attendance3);
+        student4.setAttendance(attendance4);
 
         university.addStudent(student1);
         university.addStudent(student2);
@@ -113,7 +137,6 @@ public class MainController {
 
         filterList.getItems().addAll(filters);
         filterList.setValue("No filter");
-        startDate.setValue(LocalDate.now());
 
         displayTable(university.getStudents());
     }
@@ -122,11 +145,14 @@ public class MainController {
         String filter = filterList.getValue().toLowerCase();
         chooseText.setText("Choose " +  filter);
         filterByList.getItems().clear();
+
         if(filter.equals("student")){
             for(Student student : university.getStudents()){
                 filterByList.getItems().add(student.getInfo());
             }
-        }else{
+        }
+
+        if((filter.equals("group"))){
             for(String group : university.getGroups()){
                 filterByList.getItems().add(group);
             }
@@ -161,6 +187,42 @@ public class MainController {
 
         displayTable(studentsToDisplay);
     }
+
+    private ArrayList<TableInstance> filterByDate(ArrayList<TableInstance> studentsToDisplay){
+        LocalDate start = startDate.getValue();
+        LocalDate end = endDate.getValue();
+
+        ArrayList<TableInstance> filteredStudents = new ArrayList<>(studentsToDisplay);
+
+        if(start != null) {
+            for(int i  = 0; i < filteredStudents.toArray().length; ++i){
+                if(filteredStudents.get(i).getAttended().isBefore(start)){
+                    filteredStudents.remove(i);
+                    --i;
+                }
+            }
+        }
+
+        if(end != null) {
+            for(int i  = 0; i < filteredStudents.toArray().length; ++i){
+                if(filteredStudents.get(i).getAttended().isAfter(end)){
+                    filteredStudents.remove(i);
+                    --i;
+                }
+            }
+        }
+
+        return  filteredStudents;
+    }
+
+    public void clearStartDate(){
+        startDate.setValue(null);
+    }
+
+    public void clearEndDate(){
+        endDate.setValue(null);
+    }
+
 
     @FXML
     protected void onManageStudentClick(ActionEvent event) throws IOException {
