@@ -33,6 +33,11 @@ public class University {
         }
     }
 
+    public void clear(){
+        students.clear();
+        groups.clear();
+    }
+
     public ArrayList<String> getGroups(){
         return groups;
     }

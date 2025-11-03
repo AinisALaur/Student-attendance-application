@@ -73,7 +73,7 @@
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="139.0" prefWidth="300.0">
                      <children>
-                        <Button mnemonicParsing="false" text="Import">
+                        <Button mnemonicParsing="false" onAction="#importData" text="Import">
                            <VBox.margin>
                               <Insets bottom="40.0" />
                            </VBox.margin>
@@ -151,7 +151,7 @@
                         </VBox>
                         <VBox alignment="CENTER" prefHeight="147.0" prefWidth="298.0">
                            <children>
-                              <Button mnemonicParsing="false" text="Export">
+                              <Button mnemonicParsing="false" onAction="#exportData" text="Export">
                                  <VBox.margin>
                                     <Insets bottom="40.0" />
                                  </VBox.margin>

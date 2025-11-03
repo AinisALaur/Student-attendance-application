@@ -8,7 +8,7 @@ public class Student extends Person{
     private String id;
     private String group;
     private String lastName;
-    private ArrayList<AttendanceRecord> attendance;
+    private ArrayList<AttendanceRecord> attendance = new  ArrayList<>();
 
     public Student(String name, String lastName, String id, String group) {
         this.name = name;

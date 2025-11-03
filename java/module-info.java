@@ -4,6 +4,7 @@ module com.example.studentattendance {
     requires javafx.graphics;
     requires javafx.base;
     requires java.desktop;
+    requires org.apache.poi.ooxml;
 
 
     opens com.example.studentattendance to javafx.fxml;

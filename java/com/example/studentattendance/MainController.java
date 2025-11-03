@@ -81,48 +81,48 @@ public class MainController {
 
 
     public void initialize(){
-        AttendanceRecord attended = new AttendanceRecord();
-        attended.setAttendance(LocalDate.of(2025, 11, 2));
-
-        AttendanceRecord attended1 = new AttendanceRecord();
-        attended1.setAttendance(LocalDate.of(2025, 10, 2));
-
-        AttendanceRecord attended2 = new AttendanceRecord();
-        attended2.setAttendance(LocalDate.of(2025, 9, 2));
-
-        AttendanceRecord attended3 = new AttendanceRecord();
-        attended3.setAttendance(LocalDate.of(2025, 8, 2));
-
-
-        ArrayList<AttendanceRecord> attendance1 = new  ArrayList<>(){{
-            add(attended);
-            add(attended1);
-        }};
-
-        ArrayList<AttendanceRecord> attendance2 = new  ArrayList<>(){{
-            add(attended1);
-        }};
-
-        ArrayList<AttendanceRecord> attendance3 = new  ArrayList<>(){{
-            add(attended2);
-        }};
-
-        ArrayList<AttendanceRecord> attendance4 = new  ArrayList<>(){{
-            add(attended3);
-        }};
-
-        student1.setAttendance(attendance1);
-        student2.setAttendance(attendance2);
-        student3.setAttendance(attendance3);
-        student4.setAttendance(attendance4);
-
-        university.addStudent(student1);
-        university.addStudent(student2);
-        university.addStudent(student3);
-        university.addStudent(student4);
-
-        university.addGroup("Informatikas");
-        university.addGroup("BioInformatikas");
+//        AttendanceRecord attended = new AttendanceRecord();
+//        attended.setAttendance(LocalDate.of(2025, 11, 2));
+//
+//        AttendanceRecord attended1 = new AttendanceRecord();
+//        attended1.setAttendance(LocalDate.of(2025, 10, 2));
+//
+//        AttendanceRecord attended2 = new AttendanceRecord();
+//        attended2.setAttendance(LocalDate.of(2025, 9, 2));
+//
+//        AttendanceRecord attended3 = new AttendanceRecord();
+//        attended3.setAttendance(LocalDate.of(2025, 8, 2));
+//
+//
+//        ArrayList<AttendanceRecord> attendance1 = new  ArrayList<>(){{
+//            add(attended);
+//            add(attended1);
+//        }};
+//
+//        ArrayList<AttendanceRecord> attendance2 = new  ArrayList<>(){{
+//            add(attended1);
+//        }};
+//
+//        ArrayList<AttendanceRecord> attendance3 = new  ArrayList<>(){{
+//            add(attended2);
+//        }};
+//
+//        ArrayList<AttendanceRecord> attendance4 = new  ArrayList<>(){{
+//            add(attended3);
+//        }};
+//
+//        student1.setAttendance(attendance1);
+//        student2.setAttendance(attendance2);
+//        student3.setAttendance(attendance3);
+//        student4.setAttendance(attendance4);
+//
+//        university.addStudent(student1);
+//        university.addStudent(student2);
+//        university.addStudent(student3);
+//        university.addStudent(student4);
+//
+//        university.addGroup("Informatikas");
+//        university.addGroup("BioInformatikas");
 
         ArrayList<String> filters = new ArrayList<>(){
             {

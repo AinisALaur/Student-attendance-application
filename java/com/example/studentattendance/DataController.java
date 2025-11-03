@@ -15,7 +15,9 @@ import javafx.stage.Stage;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class DataController {
     @FXML
@@ -29,6 +31,12 @@ public class DataController {
 
     @FXML
     TextField exportFilePath;
+
+    University university = University.getInstance();
+    ArrayList<Student> students = new ArrayList<>(university.getStudents());
+
+    String filePathExport = "";
+    String filePathImport = "";
 
     public void initialize(){
         ArrayList<String> fileOptions = new  ArrayList<>(){{
@@ -49,18 +57,73 @@ public class DataController {
 
     public void browseImport(ActionEvent event) throws IOException {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Open Resource File");
+        fileChooser.setTitle("Open Data File");
+        String dataFilter = importChoiceBox.getValue().toLowerCase();
+
+        fileChooser.setTitle("Save File As");
+        fileChooser.setInitialFileName("example." + dataFilter);
+        fileChooser.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter("Data files", "*."+dataFilter)
+        );
+
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         File file = fileChooser.showOpenDialog(stage);
-        importFilePath.setText(file.getAbsolutePath());
+        if (file != null) {
+            importFilePath.setText(file.getAbsolutePath());
+            filePathImport = file.getAbsolutePath();
+        }
     }
 
     public void browseExport(ActionEvent event) throws IOException {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Open Resource File");
+        String dataFilter = exportChoiceBox.getValue().toLowerCase();
+
+        fileChooser.setTitle("Save File As");
+        fileChooser.setInitialFileName("example." + dataFilter);
+        fileChooser.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter("Data files", "*."+dataFilter)
+        );
+
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        File file = fileChooser.showOpenDialog(stage);
-        exportFilePath.setText(file.getAbsolutePath());
+
+        File file = fileChooser.showSaveDialog(stage);
+
+        if (file != null) {
+            exportFilePath.setText(file.getAbsolutePath());
+            filePathExport = file.getAbsolutePath();
+        }
+    }
+
+    public void importData(){
+        DataImporter dataImporter = null;
+        if(importChoiceBox.getValue().equals("XLSX")){
+            dataImporter = new DataImporterExcel();
+        }else{
+            dataImporter = new DataImporterCSV();
+        }
+        ArrayList<Student> students = dataImporter.getStudents(filePathImport);
+        if(students == null){
+            return;
+        }
+
+        university.clear();
+        for(Student student : students){
+            university.addStudent(student);
+            if(!university.getGroups().contains(student.getGroup())){
+                university.addGroup(student.getGroup());
+            }
+        }
+    }
+
+    public void exportData(){
+        DataExporter dataexporter = null;
+        if(exportChoiceBox.getValue().equals("XLSX")){
+            dataexporter = new DataExporterExcel();
+        }else{
+            dataexporter = new DataExporterCSV();
+        }
+
+        dataexporter.exportStudents(students, filePathExport);
     }
 
 
