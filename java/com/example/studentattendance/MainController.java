@@ -34,7 +34,7 @@ public class MainController {
     TableColumn<TableInstance, String> studGroupCol;
 
     @FXML
-    TableColumn<TableInstance, LocalDate> dateCol;
+    TableColumn<TableInstance, String> dateCol;
 
     @FXML
     ChoiceBox<String> filterList;
@@ -59,9 +59,14 @@ public class MainController {
     private ArrayList<TableInstance> getTableInstances(ArrayList<Student> students){
         ArrayList<TableInstance> studentsToAppend = new ArrayList<>();
         for(Student student : students){
-            for(AttendanceRecord attended : student.getAttendance()){
-                TableInstance tableInstance = new TableInstance(student, attended.getAttendance());
+            if(student.getAttendance() == null || student.getAttendance().isEmpty()){
+                TableInstance tableInstance = new TableInstance(student, "-");
                 studentsToAppend.add(tableInstance);
+            }else {
+                for (AttendanceRecord attended : student.getAttendance()) {
+                    TableInstance tableInstance = new TableInstance(student, attended.getAttendance().toString());
+                    studentsToAppend.add(tableInstance);
+                }
             }
         }
 
@@ -196,7 +201,12 @@ public class MainController {
 
         if(start != null) {
             for(int i  = 0; i < filteredStudents.toArray().length; ++i){
-                if(filteredStudents.get(i).getAttended().isBefore(start)){
+                String date = filteredStudents.get(i).getAttended();
+                if(date.equals("-")){
+                    continue;
+                }
+
+                if(LocalDate.parse(date).isBefore(start)){
                     filteredStudents.remove(i);
                     --i;
                 }
@@ -205,7 +215,12 @@ public class MainController {
 
         if(end != null) {
             for(int i  = 0; i < filteredStudents.toArray().length; ++i){
-                if(filteredStudents.get(i).getAttended().isAfter(end)){
+                String date = filteredStudents.get(i).getAttended();
+                if(date.equals("-")){
+                    continue;
+                }
+
+                if(LocalDate.parse(filteredStudents.get(i).getAttended()).isAfter(end)){
                     filteredStudents.remove(i);
                     --i;
                 }
@@ -224,7 +239,6 @@ public class MainController {
         endDate.setValue(null);
         activateFilter();
     }
-
 
     @FXML
     protected void onManageStudentClick(ActionEvent event) throws IOException {

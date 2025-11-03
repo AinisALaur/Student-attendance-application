@@ -158,6 +158,7 @@ public class SecondController {
             student.setAttendance(attended);
             university.addStudent(student);
         }else{
+            group = selectedStudent.getGroup();
             selectedStudent.setName(name);
             selectedStudent.setLastName(lastName);
             selectedStudent.setId(id);

@@ -8,9 +8,9 @@ public class TableInstance {
     private String lastName;
     private String id;
     private String group;
-    private LocalDate attended;
+    private String attended;
 
-    public TableInstance(Student student, LocalDate date){
+    public TableInstance(Student student, String date){
         this.name = student.getName();
         this.lastName = student.getLastName();
         this.id = student.getId();
@@ -30,7 +30,7 @@ public class TableInstance {
         return id;
     }
 
-    public LocalDate getAttended(){
+    public String getAttended(){
         return attended;
     }
 }
