@@ -1,7 +1,4 @@
-package com.example.studentattendance;
-
-import java.time.LocalDate;
-import java.util.ArrayList;
+package com.example.studentattendance.Classes;
 
 public class TableInstance {
     private String name;

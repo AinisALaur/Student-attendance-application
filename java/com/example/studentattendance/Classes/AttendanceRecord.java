@@ -1,10 +1,6 @@
-package com.example.studentattendance;
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+package com.example.studentattendance.Classes;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class AttendanceRecord {
    LocalDate attendanceDate;

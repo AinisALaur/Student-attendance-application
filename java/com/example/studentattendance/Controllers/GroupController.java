@@ -1,5 +1,7 @@
-package com.example.studentattendance;
+package com.example.studentattendance.Controllers;
 
+import com.example.studentattendance.Classes.Student;
+import com.example.studentattendance.Classes.University;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,7 +13,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -100,7 +101,7 @@ public class GroupController {
     }
 
     public void goBackToMain(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("main-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/studentattendance/main-view.fxml"));
         Parent root = loader.load();
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
@@ -124,6 +125,8 @@ public class GroupController {
             return;
         }
 
+        studentsAddedToGroup.add(student);
+
         displayTable(studentsAddedToGroup);
     }
 
@@ -139,7 +142,6 @@ public class GroupController {
         studentsAddedToGroup.remove(student);
         displayTable(studentsAddedToGroup);
     }
-
 
     public void handleUpdateBtn(ActionEvent actionEvent) throws IOException {
         String nameOfGroup = groupName.getText();
@@ -177,6 +179,4 @@ public class GroupController {
         university.remGroup(groupToDelete);
         goBackToMain(actionEvent);
     }
-
-
 }

@@ -1,4 +1,6 @@
-package com.example.studentattendance;
+package com.example.studentattendance.dataHandlers;
+
+import com.example.studentattendance.Classes.Student;
 
 import java.util.ArrayList;
 

@@ -1,5 +1,7 @@
-package com.example.studentattendance;
+package com.example.studentattendance.dataHandlers;
 
+import com.example.studentattendance.Classes.AttendanceRecord;
+import com.example.studentattendance.Classes.Student;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;

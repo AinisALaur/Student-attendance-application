@@ -1,5 +1,9 @@
-package com.example.studentattendance;
+package com.example.studentattendance.Controllers;
 
+import com.example.studentattendance.Classes.AttendanceRecord;
+import com.example.studentattendance.Classes.Student;
+import com.example.studentattendance.Classes.TableInstance;
+import com.example.studentattendance.Classes.University;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,9 +17,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.text.DateFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class MainController {
@@ -242,7 +244,7 @@ public class MainController {
 
     @FXML
     protected void onManageStudentClick(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("second-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/studentattendance/second-view.fxml"));
         Parent root = loader.load();
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
@@ -251,7 +253,7 @@ public class MainController {
 
     @FXML
     protected void onManageGroupClick(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("group-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/studentattendance/group-view.fxml"));
         Parent root = loader.load();
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
@@ -260,7 +262,7 @@ public class MainController {
 
     @FXML
     protected void onManageDataClick(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("export-import.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/studentattendance/export-import.fxml"));
         Parent root = loader.load();
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));

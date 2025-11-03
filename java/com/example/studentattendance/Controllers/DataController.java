@@ -1,5 +1,8 @@
-package com.example.studentattendance;
+package com.example.studentattendance.Controllers;
 
+import com.example.studentattendance.Classes.Student;
+import com.example.studentattendance.Classes.University;
+import com.example.studentattendance.dataHandlers.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -7,17 +10,13 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class DataController {
     @FXML
@@ -48,7 +47,7 @@ public class DataController {
     }
 
     public void goBackToMain(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("main-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/studentattendance/main-view.fxml"));
         Parent root = loader.load();
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));

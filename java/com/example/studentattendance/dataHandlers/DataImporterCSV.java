@@ -1,12 +1,13 @@
-package com.example.studentattendance;
+package com.example.studentattendance.dataHandlers;
+
+import com.example.studentattendance.Classes.AttendanceRecord;
+import com.example.studentattendance.Classes.Student;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class DataImporterCSV implements DataImporter {
     @Override

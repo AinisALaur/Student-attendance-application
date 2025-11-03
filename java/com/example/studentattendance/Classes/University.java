@@ -1,4 +1,4 @@
-package com.example.studentattendance;
+package com.example.studentattendance.Classes;
 
 import java.util.ArrayList;
 

@@ -1,5 +1,8 @@
-package com.example.studentattendance;
+package com.example.studentattendance.Controllers;
 
+import com.example.studentattendance.Classes.AttendanceRecord;
+import com.example.studentattendance.Classes.Student;
+import com.example.studentattendance.Classes.University;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -140,7 +143,7 @@ public class SecondController {
     }
 
     public void goBackToMain(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("main-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/studentattendance/main-view.fxml"));
         Parent root = loader.load();
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
@@ -152,6 +155,10 @@ public class SecondController {
         String lastName = studentLName.getText();
         String id = studentId.getText();
         String group = "Not selected";
+
+        if(name.isEmpty() || lastName.isEmpty() || id.isEmpty()){
+            return;
+        }
 
         if(selectedStudent == null){
             Student student = new Student(name, lastName, id, group);
@@ -166,7 +173,6 @@ public class SecondController {
             selectedStudent.setAttendance(attended);
         }
 
-
         goBackToMain(event);
     }
 
@@ -174,8 +180,4 @@ public class SecondController {
         university.removeStudent(selectedStudent);
         goBackToMain(event);
     }
-
-
-
-
 }

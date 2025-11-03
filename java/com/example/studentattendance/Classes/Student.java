@@ -1,7 +1,6 @@
-package com.example.studentattendance;
+package com.example.studentattendance.Classes;
 
 import java.text.DateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Student extends Person{

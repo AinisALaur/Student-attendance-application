@@ -1,4 +1,7 @@
-package com.example.studentattendance;
+package com.example.studentattendance.dataHandlers;
+
+import com.example.studentattendance.Classes.AttendanceRecord;
+import com.example.studentattendance.Classes.Student;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
