@@ -3,6 +3,7 @@ module com.example.studentattendance {
     requires javafx.fxml;
     requires javafx.graphics;
     requires javafx.base;
+    requires java.desktop;
 
 
     opens com.example.studentattendance to javafx.fxml;

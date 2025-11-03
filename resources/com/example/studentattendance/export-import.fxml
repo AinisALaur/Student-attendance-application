@@ -41,7 +41,7 @@
                               </HBox>
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="150.0">
                                  <children>
-                                    <ChoiceBox prefWidth="100.0" />
+                                    <ChoiceBox fx:id="importChoiceBox" prefWidth="100.0" />
                                  </children>
                               </HBox>
                            </children>
@@ -61,8 +61,8 @@
                                  <children>
                                     <VBox alignment="CENTER" prefHeight="79.0" prefWidth="154.0">
                                        <children>
-                                          <TextField maxWidth="100.0" minWidth="100.0" prefWidth="100.0" />
-                                          <Hyperlink text="Browse" />
+                                          <TextField fx:id="importFilePath" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" />
+                                          <Hyperlink onAction="#browseImport" text="Browse" />
                                        </children>
                                     </VBox>
                                  </children>
@@ -80,7 +80,7 @@
                         </Button>
                      </children>
                   </VBox>
-                  <Button mnemonicParsing="false" text="Back">
+                  <Button mnemonicParsing="false" onAction="#goBackToMain" text="Back">
                      <VBox.margin>
                         <Insets left="10.0" top="10.0" />
                      </VBox.margin>
@@ -119,7 +119,7 @@
                                     </HBox>
                                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="150.0">
                                        <children>
-                                          <ChoiceBox prefWidth="100.0" />
+                                          <ChoiceBox fx:id="exportChoiceBox" prefWidth="100.0" />
                                        </children>
                                     </HBox>
                                  </children>
@@ -139,8 +139,8 @@
                                        <children>
                                           <VBox alignment="CENTER" prefHeight="79.0" prefWidth="154.0">
                                              <children>
-                                                <TextField maxWidth="100.0" minWidth="100.0" prefWidth="100.0" />
-                                                <Hyperlink text="Browse" />
+                                                <TextField fx:id="exportFilePath" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" />
+                                                <Hyperlink onAction="#browseExport" text="Browse" />
                                              </children>
                                           </VBox>
                                        </children>
