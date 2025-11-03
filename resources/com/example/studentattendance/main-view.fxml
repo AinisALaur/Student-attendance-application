@@ -74,7 +74,7 @@
                            <children>
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <DatePicker fx:id="startDate" onAction="#updateFilter">
+                                    <DatePicker fx:id="startDate" onAction="#activateFilter">
                                        <HBox.margin>
                                           <Insets right="20.0" />
                                        </HBox.margin>
@@ -105,7 +105,7 @@
                            <children>
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <DatePicker fx:id="endDate" onAction="#updateFilter">
+                                    <DatePicker fx:id="endDate" onAction="#activateFilter">
                                        <HBox.margin>
                                           <Insets right="20.0" />
                                        </HBox.margin>
