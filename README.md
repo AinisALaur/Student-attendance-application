@@ -10,7 +10,10 @@
 This is a simple JavaFx program to manage student attendance and assigned groups.
 
 ## Installation & setup
-Download all files and run the main java application.
+```bash
+# clone the repo
+git clone https://github.com/AinisALaur/Student-attendance-application.git
+```
 
 ## Usage
 ![Program Screenshot](demo.png)
